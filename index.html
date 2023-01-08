@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Audio</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Do you want to convert PDF into Audio?</h1>
+        <p>HERE ARE THE STEPS</p>
+    </div>
+
+    <div class="steps">
+        <div class="row">
+            <div class="col card-wrapper" data-player="Upload your PDF document">
+                    <div class="card border-0">
+                        <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
+                            <img class="w-100 h-100" src="1.jpg" alt="Card image cap">
+                        </div>
+                        <div class="card-body text-center mt-4">
+                            <h4 class="text-uppercase card-title">Step 1</h4>
+                            <p>Upload your PDF document</p>
+                        </div>
+                    </div>
+                </div>            
+                <div class="col card-wrapper" data-player="Select voice">
+                        <div class="card border-0">
+                            <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
+                                <img class="w-100 h-100" src="2.png" alt="Card image cap">
+                            </div>
+                            <div class="card-body text-center mt-4">
+                                <h4 class="text-uppercase card-title">Step 2</h4>
+                                <p>Select Voice</p>
+                            </div>
+                        </div>
+                </div>            
+                <div class="col card-wrapper" data-player="Click on Convert">
+                        <div class="card border-0">
+                            <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
+                                <img class="w-100 h-100" src="3.jpg" alt="convert">
+                            </div>
+                            <div class="card-body text-center mt-4">
+                                <h4 class="text-uppercase card-title">Step 3</h4>
+                                <p>Click on Convert</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="container2">
+        <button type="button" class="btn btn-secondary">Upload PDF</button>
+
+        <select class="btn btn-secondary form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="voice-select">
+            <option selected>Choose Voice</option>
+            <option value="0">US English (Male)</option>
+            <option value="1">US English (Female)</option>
+        </select>
+          
+        <button type="button" class="btn btn-secondary">Convert</button>
+
+    </div>
+
+
+    
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+</body>
+</html>
