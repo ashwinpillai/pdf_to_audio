@@ -54,6 +54,7 @@
             </div>
     </div>
 
+    <!--
     <div class="container2">
         <button type="button" class="btn btn-secondary">Upload PDF</button>
 
@@ -66,7 +67,22 @@
         <button type="button" class="btn btn-secondary">Convert</button>
 
     </div>
+-->
 
+    <div class="container2">
+        <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+            <input class="form-control btn btn-secondary" type=file id="formFile">
+
+            <select class="btn btn-secondary form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="voice-select">
+                <option selected>Choose Voice</option>
+                <option value="0">US English (Male)</option>
+                <option value="1">US English (Female)</option>
+            </select>
+            
+            <input  class="btn btn-secondary" id="submitBtn" type="submit" value="Convert">
+        </form>
+        
+    </div>
 
     
 
