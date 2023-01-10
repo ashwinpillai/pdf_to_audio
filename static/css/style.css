@@ -40,22 +40,25 @@ html,body{
 #voice-select{
     width:12.7rem;
     margin-top: 1rem;
-    margin-left: 8rem;
-    margin-right: 8rem;
+    /*margin-left: 8rem;
+    margin-right: 8rem;*/
 }
 
 
 .container2{
-    background-color: brown;
-   
+    
     text-align: center;
+    
 }
 
 #formFile{
     width: fit-content;
 }
 
-
+.audioContainer{
+    text-align: center;
+    margin-top: 1rem;
+}
 
 
 

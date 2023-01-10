@@ -28,7 +28,7 @@ def pdf_to_voice(file,sound):
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[sound].id)
-    audio_file = f'{uuid.uuid1()}.mp3'
+    audio_file = f'./static/audios/{uuid.uuid1()}.mp3'
     engine.save_to_file(text, audio_file)
     engine.runAndWait()
 
@@ -54,11 +54,12 @@ def convert():
             file.save(pdf_path)
             print("file saved")
             #return redirect(url_for('uploaded_file', filename=filename))
-
         sound = int(request.form.get('chosen_voice'))
         pdf_to_voice(pdf_path,sound)
 
-    return render_template("index.html")
+        
+    
+    return render_template("audio.html",audio_file=audio_file)
 
 if __name__ == '__main__':
     app.run(debug=True)

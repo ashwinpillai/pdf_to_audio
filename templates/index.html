@@ -68,13 +68,7 @@
         </form>
     </div>
 
-    <div class="audioContainer">
-        <audio controls>
-            <source src="{{ url_for('audio', filename=filename) }}" type="audio/mpeg">
-          </audio>
-    </div>
-
-    
+    {% block body %} {% endblock %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
