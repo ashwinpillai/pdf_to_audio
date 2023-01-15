@@ -59,20 +59,19 @@ def convert():
     if request.method == 'POST':
 
         if 'pdf' not in request.files:
-            flash("no file")
-            return render_template("index.html")
+            error_msg="No file chosen. Please upload a file"
+            return render_template("index.html",error_msg=error_msg)
 
         file = request.files['pdf']
 
         if file.filename == '':
-            print('No selected file')
-            return render_template("index.html")
+            error_msg="No file chosen. Please upload a file"
+            return render_template("index.html",error_msg=error_msg)
 
         if file and allowed_file(file.filename):
             sfilename = secure_filename(file.filename)
             pdf_path = os.path.join('./static/uploadedPDF', sfilename)
             file.save(pdf_path)
-            print("file saved")
             sound = int(request.form.get('chosen_voice'))
             pdf_to_voice(pdf_path,sound)
             os.remove(pdf_path)
