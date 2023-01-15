@@ -13,6 +13,7 @@ html,body{
    
  }
 
+
 .container{
     text-align: center;
     margin-top: 2rem;
@@ -22,10 +23,6 @@ html,body{
     font-family: Arial
 }
 
-.container p{
-    font-family: Georgia;
-    padding-top: 0.5rem;
-}
 
 .steps{
     margin-top: 3rem;
@@ -39,6 +36,7 @@ html,body{
 #voice-select{
     width:12.7rem;
 }
+
 
 
 .container2{
@@ -64,18 +62,33 @@ html,body{
     width: fit-content;
 }
 
+
+
 .audioContainer{
     text-align: center;
     margin-top: 1rem;
 }
 
-.error{
+.warn_msg,.error{
     text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
 }
 
-.warn_msg{
+
+
+footer{
     text-align: center;
+    font-size: 1rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
+
+footer a{
+    color: black;
+}
+
 
 
 @media (max-width: 750px) {
@@ -86,28 +99,16 @@ html,body{
     .box2{
         margin-top: 1rem;
     }
+
     .custom-circle-image {
         width: 8vw; 
         height: 8vw;
     }
-}
 
-footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
+    footer{
+        position: relative;
+    }
 }
-
-footer p{
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-footer a{
-    color: black;
-}
-
 
 @media (max-width: 510px) {
     .custom-circle-image {

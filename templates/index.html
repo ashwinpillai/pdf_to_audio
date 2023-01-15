@@ -15,15 +15,14 @@
 <body>
     <div class="container">
         <h1>Do you want to convert PDF into Audio?</h1>
-        <p>HERE ARE THE STEPS</p>
     </div>
 
     <div class="steps">
         <div class="row">
             <div class="col card-wrapper" data-player="Upload your PDF document">
                     <div class="card border-0">
-                        <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                            <img class="w-100 h-100" src="{{ url_for('static',filename='img/1.jpg') }}" alt="Card image cap">
+                        <div class="position-relative overflow-hidden mx-auto custom-circle-image">
+                            <img class="w-100 h-100" src="{{ url_for('static',filename='img/12.png') }}" alt="Card image cap">
                         </div>
                         <div class="card-body text-center mt-4">
                             <h4 class="text-uppercase card-title">Step 1</h4>
@@ -33,8 +32,8 @@
                 </div>            
                 <div class="col card-wrapper" data-player="Select voice">
                         <div class="card border-0">
-                            <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                                <img class="w-100 h-100" src="{{ url_for('static',filename='img/2.png') }}" alt="Card image cap">
+                            <div class="position-relative overflow-hidden mx-auto custom-circle-image">
+                                <img class="w-100 h-100" src="{{ url_for('static',filename='img/22.png') }}" alt="Card image cap">
                             </div>
                             <div class="card-body text-center mt-4">
                                 <h4 class="text-uppercase card-title">Step 2</h4>
@@ -44,8 +43,8 @@
                 </div>            
                 <div class="col card-wrapper" data-player="Click on Convert">
                         <div class="card border-0">
-                            <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                                <img class="w-100 h-100" src="{{ url_for('static',filename='img/3.jpg') }}" alt="convert">
+                            <div class="position-relative overflow-hidden mx-auto custom-circle-image">
+                                <img class="w-100 h-100" src="{{ url_for('static',filename='img/32.png') }}" alt="convert">
                             </div>
                             <div class="card-body text-center mt-4">
                                 <h4 class="text-uppercase card-title">Step 3</h4>
@@ -63,7 +62,9 @@
 
                 <div class="box1">
                     <input class="form-control btn btn-secondary" type=file id="formFile" name="pdf">
+                    <p style="margin-bottom: 0; font-style:italic ;">Max file size 5MB allowed</p>
                 </div>
+
     
                 <div class="box2">
                     <select class="btn btn-secondary form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="voice-select" name="chosen_voice">
@@ -83,14 +84,14 @@
     </div>
 
     <div class="error">
-        <h4>{{error_msg}}</h4>
+        <h5>{{error_msg}}</h5>
       </div>
+
+    {% block body %} {% endblock %}
 
     <footer>
         <p>Made with ❤️ by <a href="https://github.com/MashymAli">Mashym Ali</a></p>
     </footer>
-
-    {% block body %} {% endblock %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

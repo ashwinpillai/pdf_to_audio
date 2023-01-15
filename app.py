@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, render_template,after_this_request
+from flask import Flask,request, render_template
 from werkzeug.utils import secure_filename
 from PyPDF2 import PdfReader
 import pyttsx3
