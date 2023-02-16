@@ -2,7 +2,8 @@ import os
 from flask import Flask,request, render_template
 from werkzeug.utils import secure_filename
 from PyPDF2 import PdfReader
-import pyttsx3
+#import pyttsx3
+from gtts import gTTS
 import uuid
 from threading import Timer
 
@@ -26,12 +27,16 @@ def pdf_to_voice(file,sound):
         page = reader.pages[i]
         text += page.extract_text() 
 
-    engine = pyttsx3.init()
-    voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[sound].id)
+     #engine = pyttsx3.init("dummy")
+    #voices = engine.getProperty('voices')
+    #engine.setProperty('voice', voices[sound].id)
+    tts = gTTS(text=text, lang='en-us')
     audio_file = f'./static/audios/{uuid.uuid1()}.mp3'
-    engine.save_to_file(text, audio_file)
-    engine.runAndWait()
+
+    # Save the spoken text to an audio file
+    tts.save(audio_file)
+    #engine.save_to_file(text, audio_file)
+    #engine.runAndWait()
 
 def clean_folder(folder_path):
     for file in os.listdir(folder_path):
