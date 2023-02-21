@@ -1,6 +1,6 @@
 # PDF to Audio WebApp
 
-Static Website which can show you random facts on simple button click.
+Web application where you can convert your pdf into audio file. 
 
 ### Description:
 **Frontend:** HTML, CSS and Bootstrap</br>
