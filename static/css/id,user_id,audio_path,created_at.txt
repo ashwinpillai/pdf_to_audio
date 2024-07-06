@@ -1,0 +1,2 @@
+id,user_id,audio_path,created_at
+3,2c6cabaf-be0b-4557-a3e2-faff290cfafd,./static/audios/59d3e100-e0f7-11ee-bd4c-1c4d701ad52f.mp3,2024-03-13 10:35:55.006995

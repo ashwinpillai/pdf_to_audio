@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Uploaded PDF Files</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/upfiles.css') }}">
+
+</head>
+<body>
+    <div class="top-buttons">
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        <a href="{{ url_for('index') }}" class="home-btn">Home</a>
+    </div>
+    <h1>Welcome, {{ user_name }}!</h1>
+    <h2>Uploaded PDF Files:</h2>
+    <table>
+        <tr>
+            <th>File Name</th>
+            <th>Uploaded Date</th>
+        </tr>
+        {% for pdf_file in user_pdf_files %}
+        <tr>
+            <td><img src="{{ url_for('static', filename='img/pdf.png') }}" alt="PDF Icon" class="pdf-icon"> {{ pdf_file[0] }}</td>
+            <td>{{ pdf_file[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

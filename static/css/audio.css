@@ -1,0 +1,112 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("https://www.pexels.com/video/snow-light-landscape-nature-14429166/");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white; /* Text color for better visibility */
+  position: relative; /* Required for absolute positioning of buttons */
+}
+h1,
+h2 {
+  color: #007bff; /* Heading colors */
+  text-align: center;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Adding some opacity to make content more readable */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adding a shadow for better contrast */
+}
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Adjusting border color for better contrast */
+}
+th {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Background color for table headers */
+}
+
+.delete-btn,
+.download-btn {
+  background-color: #dc3545; /* Danger color for delete button */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.download-btn {
+  background-color: #28a745; /* Success color for download button */
+  margin-left: 10px; /* Adjusted margin to separate the buttons */
+}
+
+td.actions {
+  display: flex;
+  align-items: center;
+}
+
+.create-date {
+  font-size: 14px;
+  color: #666;
+}
+.top-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.download-btn {
+  background-color: #28a745; /* Success color for download button */
+  margin-left: 89px;
+  position: relative;
+  top: -42px;
+}
+
+.delete-btn:hover,
+.download-btn:hover {
+  filter: brightness(
+    90%
+  ); /* Slightly reduce brightness on hover for both buttons */
+}
+
+.logout-btn,
+.home-link {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px; /* Increased padding for larger button size */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; /* Increased font size for larger button text */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover,
+.home-btn:hover {
+  background-color: #45a049; /* Darker shade on hover */
+}

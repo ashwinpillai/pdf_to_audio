@@ -1,0 +1,46 @@
+
+body {
+    font-family: Arial, sans-serif;
+    position: relative;
+    padding-top: 50px; /* Adjusted padding to accommodate the buttons */
+}
+.top-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+.logout-btn, .home-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 24px; /* Increased padding for larger button size */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; /* Increased font size for larger button text */
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+.logout-btn:hover, .home-btn:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+th {
+    background-color: #f2f2f2;
+}
+.pdf-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}

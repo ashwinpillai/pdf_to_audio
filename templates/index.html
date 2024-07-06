@@ -1,100 +1,557 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF to Audio</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF to Audio</title>
+  <!-- <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"> -->
+  <link rel="icon" href="{{ url_for('static',filename='img/icon.png') }}" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box; /* Add box-sizing to reset */
+    }
 
-    <link rel="icon" href="{{ url_for('static',filename='img/icon.png') }}">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    body {
+      background-image: url("static/img/black.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+
+    .container {
+      text-align: center;
+      margin-top: 2rem;
+      height: 100%; /* Add height for stability */
+    }
+
+    .logout {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+      margin-top: 10px;
+    }
+
+    .container h1 {
+      font-family: Arial;
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      width: 350px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .card-body {
+      color: #fff;
+    }
+
+    .card-wrapper {
+      margin: 20px;
+    }
+
+    .row.justify-content-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .custom-circle-image {
+      width: 5vw;
+      height: 5vw;
+    }
+
+    #voice-select {
+      width: 12.7rem;
+    }
+
+    .container2 {
+      text-align: center;
+    }
+
+    .container2_1 {
+      display: flex;
+    }
+
+    /* .box1,
+    .box2,
+    .box3 {
+      flex: 1;
+      margin-top: 20px;
+      margin-right: 10px;
+      margin-left: 10px;
+    } */
+    .box1{
+      position: absolute;
+      left:600px;
+    }
+
+    .box3{
+      position:absolute;
+      right:800px;
+    }
+    #formFile {
+      width: fit-content;
+    }
+
+    img {
+      margin-top: 25px;
+      width: 85px;
+      height: 85px;
+    }
+
+    button {
+      margin-top: 20px;
+    }
+
+    .btn-primary {
+      background-color: #962256;
+      border-color: #962256;
+    }
+
+    .btn-primary:hover {
+      background-color: #6d3dcc;
+      border-color: #6d3dcc;
+    }
+
+    .audioContainer {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .warn_msg,
+    .error {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 4rem;
+      color: #962256;
+      background-image: -webkit-linear-gradient(0deg, #962256 54%, #8e24a0 68%, #6d3dcc 55%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #fff;
+      background-image: url("static/img/black.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 20px;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 9999;
+    }
+
+    footer a {
+      color: black;
+    }
+
+    @media (max-width: 750px) {
+      .container2_1 {
+        flex-direction: column;
+      }
+
+      .box2 {
+        margin-top: 1rem;
+      }
+
+      .custom-circle-image {
+        width: 8vw;
+        height: 8vw;
+      }
+
+      footer {
+        position: relative;
+      }
+    }
+
+    @media (max-width: 510px) {
+      .custom-circle-image {
+        width: 10vw;
+        height: 10vw;
+      }
+    }
+
+    @media (max-width: 395px) {
+      .custom-circle-image {
+        width: 12vw;
+        height: 12vw;
+      }
+    }
+
+    /* Define animation */
+    @keyframes slideInFromBottom {
+      0% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Apply animation to footer */
+    footer {
+      padding: 20px;
+      background-color: #f0f0f0;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      animation: slideInFromBottom 1s ease-out forwards;
+    }
+
+    /* Define animation */
+    @keyframes slideUpDown {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Apply animation to h1 */
+    .container h1 {
+      animation: slideUpDown 1s ease-out forwards;
+    }
+
+/* Toast container */
+.toast-container {
+  max-width: 400px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%; /* Center vertically */
+  z-index: 1050;
+}
+/* Toast styling */
+.toast {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Toast body */
+.toast-body {
+  font-size: 20px;
+  text-align: center;
+}
+
+/* Toast header */
+.toast-header {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom: none;
+}
+
+/* Toast close button */
+.toast .btn-close {
+  color: #fff;
+}
+
+/* Slide in animation */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Slide out animation */
+@keyframes slideOutRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Apply animation to toast */
+.toast.showing {
+  animation: slideInRight 0.5s forwards;
+}
+
+/* Apply animation to toast close */
+.toast.hiding {
+  animation: slideOutRight 0.5s forwards;
+}
+
+.nav-link{
+  color: white;
+  font-size: 1.3rem;
+}
+
+
+/* Set base font size */
+html {
+  font-size: 16px;
+}
+
+/* Responsive font size */
+@media (max-width: 1200px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 992px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+/* Adjust margins and paddings for smaller screens */
+@media (max-width: 576px) {
+  body {
+    padding: 5px;
+    margin: 0;
+  }
+}
+
+/* Increase font size for smaller screens */
+@media (max-width: 576px) {
+  .container h1 {
+    font-size: 1.8rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Adjust margin for smaller screens */
+@media (max-width: 576px) {
+  .container2_1 {
+    margin-top: 10px;
+  }
+}
+
+/* Adjust font size for footer for smaller screens */
+@media (max-width: 576px) {
+  footer {
+    font-size: 1rem;
+  }
+}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Do you want to convert PDF into Audio?</h1>
+<div class="container text-center mt-5">
+  <h1>Do you want to convert PDF into Audio?</h1>
+</div>
+
+
+<!-- Progress bar -->
+<div class="container mt-3" id="processing-message" style="display: none;">
+  <h2>Processing...</h2>
+</div>
+<!-- Toast Notification -->
+<!-- Toast Notification -->
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+  <div class="toast-header">
+    <strong class="me-auto">Notification</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    <!-- Message will be dynamically inserted here -->
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgba(0, 0, 0, 0.5);">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">PDF to Audio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('audio_files') }}">Show Audio Files</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('my_files') }}">Uploaded Files</a>
+        </li>
+      </ul>
     </div>
-
-    <div class="steps">
-        <div class="row">
-            <div class="col card-wrapper" data-player="Upload your PDF document">
-                    <div class="card border-0">
-                        <div class="position-relative overflow-hidden mx-auto custom-circle-image">
-                            <img class="w-100 h-100" src="{{ url_for('static',filename='img/12.png') }}" alt="Card image cap">
-                        </div>
-                        <div class="card-body text-center mt-4">
-                            <h4 class="text-uppercase card-title">Step 1</h4>
-                            <p>Upload your PDF document</p>
-                        </div>
-                    </div>
-                </div>            
-                <div class="col card-wrapper" data-player="Select voice">
-                        <div class="card border-0">
-                            <div class="position-relative overflow-hidden mx-auto custom-circle-image">
-                                <img class="w-100 h-100" src="{{ url_for('static',filename='img/221.png') }}" alt="Card image cap">
-                            </div>
-                            <div class="card-body text-center mt-4">
-                                <h4 class="text-uppercase card-title">Step 2</h4>
-                                <p>Select Language</p>
-                            </div>
-                        </div>
-                </div>            
-                <div class="col card-wrapper" data-player="Click on Convert">
-                        <div class="card border-0">
-                            <div class="position-relative overflow-hidden mx-auto custom-circle-image">
-                                <img class="w-100 h-100" src="{{ url_for('static',filename='img/32.png') }}" alt="convert">
-                            </div>
-                            <div class="card-body text-center mt-4">
-                                <h4 class="text-uppercase card-title">Step 3</h4>
-                                <p>Click on Convert</p>
-                            </div>
-                        </div>
-                </div>
-            </div>
-    </div>
+  </div>
+</nav>
 
 
-    <div class="container2">
-        <form method=POST enctype=multipart/form-data action="{{ url_for('convert') }}" id="form">
-            <div class="container2_1">
+<h1>Welcome, {{ name }}</h1>
 
-                <div class="box1">
-                    <input class="form-control btn btn-secondary" type=file id="formFile" name="pdf">
-                    <p style="margin-bottom: 0; font-style:italic ;">Max file size 5MB allowed</p>
-                </div>
 
-    
-                <div class="box2">
-                    <select class="btn btn-secondary form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="voice-select" name="chosen_voice">
-                        <option value="en-us"  selected>English</option>
-                        <option value="es">Spanish</option>
-                    </select>
-                </div>
-
-                
-            <div class="box3">
-                <input  class="btn btn-secondary" id="submitBtn" type="submit" value="Convert">
-            </div>
-
-            </div>
-            
-        </form>
-    </div>
-
-    <div class="error">
-        <h5>{{error_msg}}</h5>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4 card-wrapper" data-player="Upload your PDF document">
+      <div class="card border-0 shadow">
+        <div class="card-body text-center mt-4">
+          <img src="{{ url_for('static',filename='img/12.png') }}" class="img-fluid mb-3" alt="Upload PDF">
+          <h4 class="text-uppercase card-title">Step 1</h4>
+          <p class="card-text">Upload your PDF document</p>
+        </div>
       </div>
-
-    {% block body %} {% endblock %}
-
-    <footer>
-        <p>Made with ❤️ by <a href="https://github.com/MashymAli">Mashym Ali</a></p>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    </div>
     
+    <div class="col-md-4 card-wrapper" data-player="Click on Convert">
+      <div class="card border-0 shadow">
+        <div class="card-body text-center mt-4">
+          <img src="{{ url_for('static',filename='img/32.png') }}" class="img-fluid mb-3" alt="Convert PDF">
+          <h4 class="text-uppercase card-title">Step 2</h4>
+          <p class="card-text">Click on Convert</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <form
+    method="POST"
+    enctype="multipart/form-data"
+    action="{{ url_for('convert') }}"
+    id="form"
+  >
+    <div class="container2_1">
+      <div class="box1">
+        <input
+          class="form-control btn"
+          type="file"
+          id="formFile"
+          name="pdf"
+        />
+        <p style="margin-bottom: 0; font-style: italic">
+          Max file size 5MB allowed
+        </p>
+      </div>
+     
+
+      <div class="box3">
+        <input
+          class="btn btn-primary"
+          id="submitBtn"
+          type="submit"
+          value="Convert"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+{% block body %} {% endblock %}
+<footer>
+  <p>&copy; 2024 Developed by Ayan Kazi and Rashi Shaikh</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+0paxFQzVgHO3a7sm+rPXT5uhJp8ylT0PvWvSh0sI3YT8hX+58Ftfbo+U1" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+
+$(document).ready(function() {
+    $('#submitBtn').click(function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+
+
+        var fileInput = $('#formFile')[0];
+        var file = fileInput.files[0];
+
+        // Check if a file is selected
+        if (!file) {
+            // Display error message if no file is selected
+            $('.toast-body').text("Please select a file.");
+            $('.toast').toast('show');
+            return; // Exit function
+        }
+
+        // Check if the selected file is a PDF
+        if (file.type !== "application/pdf") {
+            // Display error message if the file is not a PDF
+            $('.toast-body').text("Only PDF files are allowed.");
+            $('.toast').toast('show');
+            return; // Exit function
+        }
+
+
+        // Show processing message
+        $('#processing-message').css('display', 'block');
+        
+        // Submit form via AJAX
+        $.ajax({
+            url: '/convert',
+            type: 'POST',
+            data: new FormData($('#form')[0]),
+            cache: false,
+            contentType: false,
+            processData: false,
+            timeout: 30000, // Set timeout to 30 seconds (adjust as needed)
+
+            success: function(data) {
+                // Hide processing message
+                $('#processing-message').css('display', 'none');
+                
+                // Check if audio conversion was successful
+                if (data.success) {
+                    // Display success message as a Toast
+                    $('.toast-body').text(data.message);
+                    $('.toast').toast('show');
+                } 
+            }
+        });
+    });
+});
+
+</script>
+
+
+
+
+
 </body>
 </html>

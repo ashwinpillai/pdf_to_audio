@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Files</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/audio.css') }}"
+    />
+    <style>
+      .marquee {
+        width: 100%; /* Adjust the width as needed */
+        white-space: nowrap; /* Prevent the text from wrapping */
+        overflow: hidden; /* Hide the overflowing text */
+        animation: marquee 15s linear infinite; /* Adjust the duration and timing function as needed */
+      }
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%); /* Change the direction if needed */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome, {{ user_name }}</h1>
+    <h2 class="marquee">
+      Please download the audio files within the next 10 days, as they will be
+      deleted from our server thereafter
+    </h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Audio File</th>
+          <th>Created</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for audio_file in audio_files %}
+        <tr>
+          <td>
+            <audio controls>
+              <source src="{{ audio_file[0] }}" type="audio/mp3" />
+              Your browser does not support the audio element.
+            </audio>
+          </td>
+          <td>
+            <span class="create-date">{{ audio_file[1] }}</span>
+          </td>
+          <td>
+            <form method="post" action="{{ url_for('audio_files') }}">
+              <input type="hidden" name="id" value="{{ audio_file[0] }}" />
+              <button class="delete-btn" type="submit">Delete</button>
+            </form>
+            <a href="{{ audio_file[0] }}" download class="download-btn"
+              >Download</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="top-buttons">
+      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+      <a href="{{ url_for('index') }}" class="home-link">Back to Home</a>
+    </div>
+  </body>
+</html>
